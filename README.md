@@ -1,6 +1,6 @@
 project_euler
 =============
 
-This repo stores my solutions to prject euler problems.
+My solutions to various project euler problems written in various languages.
 
 http://projecteuler.net/
