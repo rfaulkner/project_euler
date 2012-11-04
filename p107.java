@@ -7,6 +7,7 @@
  * @author Ryan Faulkner
  */
 
+import java.util.Iterator;
 import java.util.ArrayList;
 import helper.Edge;
 import helper.EdgeComparator;
@@ -99,7 +100,17 @@ public class p107 {
 	
 	// Creates a new graph in `adj_list` from edges in edgelist
 	private static void create_new_graph(ArrayList<Edge> edgelist) {
+		Iterator<Edge> it = edgelist.iterator();
+		Edge e;
 		
+		// Clear out the old matrix -- not great performance-wise
+		for (int i = 0; i < p107.num_nodes; i++) 
+			for (int j = 0; j < p107.num_nodes; j++)
+				p107.adj_list[i][j] = -1;
+				
+		while(it.hasNext()) {
+			e = it.next();
+			p107.adj_list[e.get_node1()][e.get_node2()] = e.get_weight(); }
 	}
 	
 	public static void main(String[] args) {
