@@ -11,29 +11,21 @@
 
 using namespace std;
 
-int main() {
-  int factor = 2;
-  int temp;
-  int sum = 0;  
+long top_prime(long n) {
+  long limit = n / 2 + 1;
+  long i = 2;
   
-  long n = 600851475143;
-  long limit = n;
-  bool flag = false;
- 
-  while (factor <= limit) {
-    limit = n / factor; 
-    if (n % factor == 0) {
-       flag = true;
-       break;
-    }
-    factor++;
+  while (i < limit) {
+    if (n % i == 0)
+      return top_prime(n / i);
+    i++;
   }
+  return n;
+}
 
-  if (!flag)
-    cout << "No prime factor" << endl;
-  else
-    cout << limit << endl;
-
+int main() {
+  long n = 600851475143;
+  cout << top_prime(n) << endl;
   return 0;
 }
 
