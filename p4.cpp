@@ -11,7 +11,7 @@
 
 using namespace std;
 
-// Flags `pal` for being a palndrome
+// Flags `pal` for being a palindrome
 bool is_palindrome(int pal) {
   string str = static_cast<ostringstream*>( &(ostringstream() << pal) )->str();
   int n = str.length();
@@ -32,27 +32,18 @@ bool is_palindrome(int pal) {
 
 int main() {
   int p,i,j;
-  bool flag = false;
+  int pal = 0;
   
   // look for all pairs starting at 999 x 999
-  for (i=999; i >= 100; i--) {
+  for (i=999; i >= 100; i--)
     for (j = i; j >= 100; j--)
     {
       p = i*j;
-      if (is_palindrome(p)) {
-        flag = true;
-        break;
-      }
+      if (is_palindrome(p) && p > pal)
+        pal = p;
     }
-    if (flag)
-      break;
-  }
 
-  if (!flag)
-    cout << "No palindrome found." << endl;
-  else
-    cout << "The product of " << i << " and " << j << " is " << p << endl;
-
+  cout << pal << endl;
   return 0;
 };
  
