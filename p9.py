@@ -7,7 +7,7 @@
 """
 
 __author__ = "ryan faulkner"
-__date__ = "11/6/2012"
+__date__ = "11/17/2012"
 __license__ = "GPL (version 2 or later)"
 
 import math
