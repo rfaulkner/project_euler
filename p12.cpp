@@ -28,7 +28,6 @@ map_t::iterator iter;
 
 int count_divisors(long n) {
     
-    long numerator = n; // copy of n that may be modified
     int count = 2; // 1 & n are divisors
     long i = n/2;
     
@@ -38,14 +37,9 @@ int count_divisors(long n) {
         return iter->second;
     
     while (i > 1)
-        if (numerator % i-- == 0) 
-            if (map.find(i+1) != map.end()) {
-                numerator /= (i+1);
-                i = numerator/2 + 1;
-                count += map[i];
-            }
-            else count++;
-    
+        if (n % i-- == 0)
+            count++;
+
     map[n] = count; // store the divisors in the hash_map
     return count;
 }
@@ -54,25 +48,27 @@ int main() {
     
     long index = 2;
     int n, n_plus_1;    
-
+    int num_divisors;
+    long tri_num;
+    
     // note that for triangle number k, T(k) = n(n+1) / 2
     n = count_divisors(index);
     while (true) {
         n_plus_1 = (count_divisors(++index)); // count the divisors for the factor n+1
+        tri_num = (index - 1) * (index) / 2;
         
-        // the divisors of n and n+1 are disctinct, so add them, remove one, and compare to 500
-        if (n + n_plus_1 - 2 > 500) 
-            break;
+        num_divisors = n + n_plus_1;
+        num_divisors -= (tri_num % 2 == 0) ? 1 : 2;
+        map[tri_num] = num_divisors;
         
+        // map[(index - 1) * (index) / 2] = num_divisors;
+        if (num_divisors >= 500) 
         n = n_plus_1;        
         
-        cout << "The " << (index - 1) << "th triangle number is: " << (index - 1) * (index) / 2 << endl;
-        cout << "Number of divisors: " << n + n_plus_1 - 2 << endl;
-        for (map_t::iterator i(map.begin()), j(map.end()); i!=j; ++i)
-            cout << i->first << " : " << i->second << ", ";
-        cout << endl;
-        cout << endl;
-
+        cout << "The " << (index - 1) << "th triangle number is: " << tri_num << endl;
+        cout << "Number of divisors: " << num_divisors << endl;
+        for (map_t::iterator i(map.begin()), j(map.end()); i!=j; ++i) cout << i->first << " : " << i->second << ", ";
+        cout << endl << endl;
         
         if (index == 10) break;
     };
