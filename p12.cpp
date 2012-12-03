@@ -22,33 +22,31 @@ using namespace std;
 
 // Hash that stores number of divisors
 typedef __gnu_cxx::hash_map <long, int> map_t;
-typedef __gnu_cxx::hash_map <long, int> :: iterator iter_t;
 
 map_t map;
-iter_t iter;
+map_t::iterator iter;
 
 int count_divisors(long n) {
     
+    long numerator = n; // copy of n that may be modified
     int count = 2; // 1 & n are divisors
-    long i = 2;
-    long limit = n/2 + 1;
+    long i = n/2;
     
     // Check whether this value has a already a stored number of divisors
     iter = map.find(n); 
     if (iter != map.end())
         return iter->second;
     
-    while (i < limit) 
-        if (n % i++ == 0) 
-            if (map.find(i) != map.end()) {
-                n /= i;
-                limit = n/2 + 1;
+    while (i > 1)
+        if (numerator % i-- == 0) 
+            if (map.find(i+1) != map.end()) {
+                numerator /= (i+1);
+                i = numerator/2 + 1;
                 count += map[i];
-                i = 2;
             }
             else count++;
     
-    map[n] = count; // store the divisors in 
+    map[n] = count; // store the divisors in the hash_map
     return count;
 }
 
@@ -63,36 +61,23 @@ int main() {
         n_plus_1 = (count_divisors(++index)); // count the divisors for the factor n+1
         
         // the divisors of n and n+1 are disctinct, so add them, remove one, and compare to 500
-        if (n + n_plus_1 - 3 > 500) 
+        if (n + n_plus_1 - 2 > 500) 
             break;
         
         n = n_plus_1;        
+        
         cout << "The " << (index - 1) << "th triangle number is: " << (index - 1) * (index) / 2 << endl;
-        cout << "Number of divisors: " << n + n_plus_1 - 3 << endl;
-        if (index == 20) break;
+        cout << "Number of divisors: " << n + n_plus_1 - 2 << endl;
+        for (map_t::iterator i(map.begin()), j(map.end()); i!=j; ++i)
+            cout << i->first << " : " << i->second << ", ";
+        cout << endl;
+        cout << endl;
+
+        
+        if (index == 10) break;
     };
     
-    
-
-    // for (iter = map.begin(); iter != map.end(); iter++)
-    //    cout << iter->first << " : " << iter->second >> endl;
-
     return 0;
 }
 
 
-/*
- 
- Examples of how to work with the hash_map:
- 
- map[4] = 2;
- map[2] = 1;
- iter = map.find(4);
- 
- if (iter == map.end())
- cout << "key does not exist." << endl;
- else {
- cout << iter->first << endl;
- cout << iter->second << endl;
- } 
- */
