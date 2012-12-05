@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Ryan Faulkner on 12/4/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 R.Faulkner. All rights reserved.
 //
 
 #include <iostream>
