@@ -102,12 +102,19 @@ void print(int** a, int num_rows) {
     }
 }
 
+// Gets the maximum value in an array of integers
+int find_max(int* vals, int num_vals) {
+    int max_val = std::max(vals[0],vals[1]);
+    for (int i  = 2; i < num_vals; i++) max_val = std::max(max_val,vals[i]);
+    return max_val;
+}
+
 int main() {
     
     int** rows; 
     int** sums;
-    int x,y,num_rows = 15;
-    std:string filename = "p18.txt";
+    int x,y,num_rows = 100;
+    std:string filename = "p62.txt";
     
     // initialize sums
     // sums = init_2D_array<int>(0,num_rows,num_rows);
@@ -133,11 +140,13 @@ int main() {
         }        
     }
     
-    cout << endl << "Row values:" << endl;
-    print(rows, num_rows);
+    // cout << endl << "Row values:" << endl;
+    // print(rows, num_rows);
     
-    cout << endl << "Sums:" << endl;
-    print(sums, num_rows);
+    // cout << endl << "Sums:" << endl;
+    // print(sums, num_rows);
+    
+    // cout << endl << "Maximum: " << find_max(sums[num_rows-1]) << endl;
     
     return 0;
 }
