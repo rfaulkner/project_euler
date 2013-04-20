@@ -42,11 +42,8 @@ public:
     int get_size() { return this->size; }
     int get_digit(int index) { return this->digits[index]; }
     
-    /*
-     const BigNumber operator*(const BigNumber &other) {
-        BigNumber result();
-        return result;
-    } */
+    
+    BigNumber operator+(const BigNumber& other);
     
     /*
      * Multiplies this big number by the arg
@@ -75,10 +72,15 @@ private:
 };
 
 
+BigNumber BigNumber::operator+(const BigNumber&  other)
+{    
+    return BigNumber(1,1);
+}
 
 int main() {
     
     BigNumber* a = new BigNumber(200, 1); 
+
     int sum = 0;
     
     a->print();
