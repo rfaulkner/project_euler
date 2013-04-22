@@ -21,6 +21,7 @@ class BigNumber {
         BigNumber(int dim) {
             this->digits = new int[dim];
             this->size = dim;
+            this->is_neg = false;
             for (int i = 0; i < dim; i++) this->digits[i] = 0;
         }
 
@@ -29,20 +30,18 @@ class BigNumber {
 
             this->digits = new int[dim];
             this->size = dim;
+            this->is_neg = false;
             for (i = 0; i < dim; i++) {
                 this->digits[i] = val % 10;
                 val /= 10;
             }
         }
 
-        /*
-         * Copy the argument
-         */
         BigNumber(BigNumber& other) {
 
             this->size = other.get_size();
             this->digits = new int[this->size];
-
+            this->is_neg = other.is_negative_number();
             for (int i = 0; i < this->size; i++)
                 digits[i] = other.get_digit(i);
         }
@@ -53,6 +52,7 @@ class BigNumber {
             cout << endl;
         }
 
+        bool is_negative_number() { return this->is_neg; }
         int get_size() { return this->size; }
         int get_digit(int index) { return this->digits[index]; }
 
@@ -83,7 +83,7 @@ class BigNumber {
 
             // TODO - throw exception instead
             if (carry > 0)
-                cout << "BigNumber::operator+ - Overflow." << endl;
+                cout << "BigNumber::operator- - Overflow." << endl;
 
             return this;
         }
@@ -111,4 +111,5 @@ class BigNumber {
     private:
         int* digits;
         int size;
+        bool is_neg;
 };
