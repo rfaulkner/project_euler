@@ -46,6 +46,8 @@ class BigNumber {
                 digits[i] = other.get_digit(i);
         }
 
+        ~BigNumber() { delete[] this->digits; }
+
         // Prints the number
         void print() {
             for (int i = this->size; i >= 0; i--) cout << this->digits[i];
