@@ -52,9 +52,9 @@ class BigNumber {
             cout << endl;
         }
 
-        bool is_negative_number() { return this->is_neg; }
-        int get_size() { return this->size; }
-        int get_digit(int index) { return this->digits[index]; }
+        bool is_negative_number() const { return this->is_neg; }
+        int get_size() const { return this->size; }
+        int get_digit(int index) const { return this->digits[index]; }
 
         /*
          * Adds this big number by the arg - size of operands
