@@ -72,7 +72,7 @@ class BigNumber {
         /*
          * Adds this big number by the arg - size of operands
          */
-        BigNumber* operator+(BigNumber& other)
+        BigNumber & operator+(const BigNumber& other)
         {
             int i, new_val, carry = 0;
 
@@ -80,7 +80,7 @@ class BigNumber {
             if (this->size != other.get_size())
             {
                 cout << "BigNumber::operator+ - Mismatched sizes." << endl;
-                return new BigNumber(1,0);
+                return *(new BigNumber(1,0));
             }
 
             for (i=0; i < this->size; i++)
@@ -98,7 +98,7 @@ class BigNumber {
             if (carry > 0)
                 cout << "BigNumber::operator- - Overflow." << endl;
 
-            return this;
+            return *this;
         }
 
         /*
