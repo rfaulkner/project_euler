@@ -104,13 +104,12 @@ class BigNumber {
         /*
          * Multiplies this big number by the arg
          */
-        BigNumber* multiply(int other) {
+        BigNumber & operator*(const int &other) {
 
             int i, new_val, carry = 0;
 
             for (i=0; i < this->size; i++) {
                 new_val = digits[i] * other + carry;
-
                 this->digits[i] = new_val % 10;
                 if (new_val >= 10)
                     carry = new_val / 10;
@@ -118,7 +117,7 @@ class BigNumber {
                     carry = 0;
             }
 
-            return this;
+            return *this;
         }
 
     private:
