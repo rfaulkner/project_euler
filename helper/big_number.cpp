@@ -58,6 +58,17 @@ class BigNumber {
         int get_size() const { return this->size; }
         int get_digit(int index) const { return this->digits[index]; }
 
+        BigNumber & operator=(const BigNumber &rhs)
+        {
+            delete[] this->digits;
+
+            this->size = rhs.get_size();
+            this->digits = new int[this->size];
+            this->is_neg = rhs.is_negative_number();
+
+            return *this;
+        }
+
         /*
          * Adds this big number by the arg - size of operands
          */
