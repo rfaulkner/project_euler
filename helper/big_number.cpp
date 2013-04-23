@@ -76,6 +76,10 @@ class BigNumber {
 
         BigNumber & operator=(const BigNumber &rhs)
         {
+            // Check for self-assignment!
+            if (this == &rhs)
+                return *this;
+
             delete[] this->digits;
 
             this->size = rhs.get_size();
