@@ -66,6 +66,13 @@ class BigNumber {
                     return i;
              return 0;
         }
+        int* get_digits_copy() const
+        {
+            int* digits_cp = new int[this->size];
+            for (int i = 0; i < this->size; i++)
+                digits_cp[i] = this->digits[i];
+            return digits_cp;
+        }
 
         BigNumber & operator=(const BigNumber &rhs)
         {
