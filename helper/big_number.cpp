@@ -18,6 +18,21 @@ class BigNumber {
 
     public:
 
+        BigNumber()
+        {
+            this->digits = NULL;
+            this->size = 0;
+            this->is_neg = false;
+        }
+
+        BigNumber(const BigNumber& bn)
+        {
+            this->digits = new int[bn.get_size()];
+            this->size = bn.get_size();
+            this->is_neg = bn.is_negative_number();
+            this->digits = bn.get_digits_copy();
+        }
+
         BigNumber(int dim) {
             this->digits = new int[dim];
             this->size = dim;
@@ -37,21 +52,12 @@ class BigNumber {
             }
         }
 
-        BigNumber(BigNumber& other) {
-
-            this->size = other.get_size();
-            this->digits = new int[this->size];
-            this->is_neg = other.is_negative_number();
-            for (int i = 0; i < this->size; i++)
-                digits[i] = other.get_digit(i);
-        }
-
         ~BigNumber() { delete[] this->digits; }
 
         /*
         * Prints the number
         */
-        void print() {
+        void print() const {
             for (int i = this->size - 1; i >= 0; i--) cout << this->digits[i];
             cout << endl;
         }
