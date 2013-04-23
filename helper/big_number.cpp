@@ -222,6 +222,24 @@ class BigNumber {
             return *this;
         }
 
+         const BigNumber operator+(const BigNumber &other) const {
+            BigNumber result = *this;
+            result += other;
+            return result;
+         }
+
+         const BigNumber operator-(const BigNumber &other) const {
+            BigNumber result = *this;
+            result -= other;
+            return result;
+         }
+
+        const BigNumber operator*(const int &other) const {
+            BigNumber result = *this;
+            result *= other;
+            return result;
+        }
+
     private:
         int* digits;
         int size;
