@@ -118,6 +118,82 @@ class BigNumber {
         }
 
         /*
+         * Adds this big number by the arg - size of operands
+         */
+        BigNumber & operator-(const BigNumber& other)
+        {
+            int i, new_val;
+            int this_msd = this->get_most_significant_digit();
+            int other_msd = other.get_most_significant_digit();
+            bool this_larger = true;
+            int last_idx = this->size - 1;
+            int* digits_cp = other.get_digits_copy();
+
+            int *large_ref, *small_ref;
+
+            // TODO - throw exception instead
+            if (this->size != other.get_size())
+            {
+                cout << "BigNumber::operator- - Mismatched sizes." << endl;
+                return *(new BigNumber(1,0));
+            }
+
+            // Determine which is larger
+            if (other_msd > this_msd)
+                this_larger = false;
+            else if (other_msd == this_msd)
+                for (i = this_msd; i >= 0; i--)
+                {
+                    if (this->digits[i] < digits_cp[i])
+                    {
+                        this_larger = false;
+                        this->is_neg = true;
+                        break;
+                    }
+                    else if (this->digits[i] > digits_cp[i])
+                        break;
+                }
+
+            // Set refs
+            if (this_larger)
+            {
+                large_ref = this->digits;
+                small_ref = digits_cp;
+            }
+            else
+            {
+                small_ref = this->digits;
+                large_ref = digits_cp;
+            }
+
+            // Perform subtraction
+            for (i = 0; i < this->size-1; i++)
+            {
+
+                new_val = large_ref[i] - small_ref[i];
+
+                // need to borrow?
+                if (new_val < 0)
+                {
+                    large_ref[i] = new_val + 10;
+                    large_ref[i+1] -= 1;
+                }
+                else
+                    large_ref[i] = new_val;
+            }
+
+            new_val = large_ref[last_idx] - small_ref[last_idx];
+            large_ref[last_idx] = new_val;
+
+            if (large_ref != this->digits)
+                for (i = 0; i < this->size; i++)
+                    this->digits[i] = large_ref[i];
+            delete[] digits_cp;
+
+            return *this;
+        }
+
+        /*
          * Multiplies this big number by the arg
          */
         BigNumber & operator*(const int &other) {
