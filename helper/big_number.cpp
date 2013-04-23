@@ -59,6 +59,13 @@ class BigNumber {
         bool is_negative_number() const { return this->is_neg; }
         int get_size() const { return this->size; }
         int get_digit(int index) const { return this->digits[index]; }
+        int get_most_significant_digit() const
+        {
+            for (int i = this->size - 1; i >= 0; i--)
+                if (digits[i] > 0)
+                    return i;
+             return 0;
+        }
 
         BigNumber & operator=(const BigNumber &rhs)
         {
