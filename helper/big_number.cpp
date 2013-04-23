@@ -92,7 +92,7 @@ class BigNumber {
         /*
          * Adds this big number by the arg - size of operands
          */
-        BigNumber & operator+(const BigNumber& other)
+        BigNumber & operator+=(const BigNumber& other)
         {
             int i, new_val, carry = 0;
 
@@ -124,7 +124,7 @@ class BigNumber {
         /*
          * Adds this big number by the arg - size of operands
          */
-        BigNumber & operator-(const BigNumber& other)
+        BigNumber & operator-=(const BigNumber& other)
         {
             int i, new_val;
             int this_msd = this->get_most_significant_digit();
@@ -200,7 +200,7 @@ class BigNumber {
         /*
          * Multiplies this big number by the arg
          */
-        BigNumber & operator*(const int &other) {
+        BigNumber & operator*=(const int &other) {
 
             int i, new_val, carry = 0;
 
