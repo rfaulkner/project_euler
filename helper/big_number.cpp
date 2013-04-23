@@ -48,9 +48,11 @@ class BigNumber {
 
         ~BigNumber() { delete[] this->digits; }
 
-        // Prints the number
+        /*
+        * Prints the number
+        */
         void print() {
-            for (int i = this->size; i >= 0; i--) cout << this->digits[i];
+            for (int i = this->size - 1; i >= 0; i--) cout << this->digits[i];
             cout << endl;
         }
 
