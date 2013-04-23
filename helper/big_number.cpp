@@ -89,7 +89,7 @@ class BigNumber {
             delete[] this->digits;
 
             this->size = rhs.get_size();
-            this->digits = new int[this->size];
+            this->digits = rhs.get_digits_copy();
             this->is_neg = rhs.is_negative_number();
 
             return *this;
