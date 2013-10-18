@@ -1,8 +1,8 @@
 
 //
-//  p40.cpp
+//  p41.cpp
 //  
-//  Project Euler Problem 40
+//  Project Euler Problem 41
 //
 //  Created by Ryan Faulkner on 10/10/13.
 //  Copyright (c) 2013. All rights reserved.
@@ -17,26 +17,31 @@ using namespace std;
 
 int main() {
 
-    BigNumber* largest;
-    BigNumber* curr = new BigNumber(9, 2143);
+    const int size = 10;
+    const BigNumber one(size, 1);
+    BigNumber curr(size, 1000000000);
 
-    // Find largest pandigital
+    //
+    // TODO!  This is inefficient, it would be even
+    //          better find a way to list all of the
+    //          the pandigitals rathe than check for 
+    //          them
+    //
+    
+    // Find largest pandigital prime
     while (1)
     {
-        // Check for overflow
-        if (curr == 0)
-           break;
-
+        // curr.print();
         // Check for prime
-        if (curr->is_prime() && curr->is_pandigital) {
-            largest = curr;
-        }
-
-        curr++;
+        if (is_pandigital(curr))
+            if (is_prime(curr)) {                
+                break;
+            }
+        curr -= one;
     }
 
     cout << "The largest pandigital prime is:" << endl;
-    largest->print();
+    curr.print();
 
     return 0;
 }
